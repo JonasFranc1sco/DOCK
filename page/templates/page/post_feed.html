@@ -1,0 +1,12 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+<h2> Posts recentes </h2>
+
+{% for page in posts %}
+    <h3>Author: {{ page.author }}</h3> 
+    <p>Data de publicação: {{ page.publication_date }}</p>
+    <p> {{ page.content }} </p>
+{% endfor %}
+
+{% endblock content %}
+    

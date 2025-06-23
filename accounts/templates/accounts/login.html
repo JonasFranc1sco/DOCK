@@ -1,0 +1,16 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+<div class="container">
+    <h2 class="title">Sign up here!</h2>
+    <form action="" class="form-group" method="POST">
+        {% csrf_token %}
+        {{ form.username }}
+        {{form.password}}
+        <button type="submit" class="send-button">Sign up</button>
+        <div class="signup-text">
+            Have an account?
+            <a href="/login/" class="signup-link">Sign in</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
