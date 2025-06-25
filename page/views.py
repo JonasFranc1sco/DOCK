@@ -17,5 +17,5 @@ def page_post(request):
     return render(request, 'page/create_page.html', {'form': form})
             
 def post_feed(request):
-    posts = Page.objects.filter(publication_date__lte=timezone.now()).order_by('publication_date')
+    posts = Page.objects.select_related('author').all().order_by('-publication_date')
     return render(request, 'page/post_feed.html', {'posts': posts})
