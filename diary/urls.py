@@ -19,6 +19,7 @@ from django.urls import path, include
 from accounts.views import account_register, account_login, success
 from page.views import page_post, post_feed
 urlpatterns = [
+    path('__reload__/', include("django_browser_reload.urls")),
     path('admin/', admin.site.urls),
     path('register/', account_register, name='register'),
     path('login/', account_login, name='login'),
