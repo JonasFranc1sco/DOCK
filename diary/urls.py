@@ -17,13 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from accounts.views import account_register, account_login, success
-from page.views import page_post, post_feed
+from page.views import post_create, post_feed
 urlpatterns = [
     path('__reload__/', include("django_browser_reload.urls")),
     path('admin/', admin.site.urls),
     path('register/', account_register, name='register'),
     path('login/', account_login, name='login'),
     path('success/', success, name='success'),
-    path('post/', page_post, name='post'),
-    path('feed/', post_feed, name='feed')
+    path('post/', post_create, name='post_create'),
+    path('feed/', post_feed, name='post_feed')
 ]
