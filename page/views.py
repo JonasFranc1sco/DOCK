@@ -4,7 +4,7 @@ from django.utils import timezone
 from page.models import Page
 from accounts.views import success
 
-def page_post(request):
+def post_create(request):
     if request.method == 'POST':
         form = PageForm(request.POST)
         if form.is_valid():
@@ -14,7 +14,7 @@ def page_post(request):
             return redirect('success')
     else:
         form = PageForm()
-    return render(request, 'page/create_page.html', {'form': form})
+    return render(request, 'page/post_create.html', {'form': form})
             
 def post_feed(request):
     posts = Page.objects.select_related('author').all().order_by('-publication_date')
