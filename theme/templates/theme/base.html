@@ -1,0 +1,55 @@
+{% load static %}
+{% load tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Diary{% endblock %}</title>
+
+  {% tailwind_css %}
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+  <!-- Navbar fixa no topo -->
+  <nav class="bg-white shadow-md px-4 py-2 flex items-center justify-between">
+    <div class="flex items-center space-x-4">
+      <img src="{% static 'img/website_icon.png' %}" alt="Logo" class="w-20 h-20">
+      <span class="font-semibold text-3xl text-gray-700">Diary</span>
+    </div>
+
+    <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center space-x-6 text-gray-700">
+      <span class="cursor-pointer hover:text-gray-900">
+      <a href="{% url 'post_feed' %}">
+        <i class="fas fa-stream"></i>
+      </a>
+      </span>
+      <span class="cursor-pointer hover:text-gray-900">
+      <a href="{% url 'user_post' %}">
+        <i class="fas fa-book"></i>
+      </a>
+      </span>
+      <span class="cursor-pointer hover:text-gray-900">
+        <a href="{% url 'success' %}">
+          <i class="fas fa-calendar-alt"></i>
+        </a>
+      </span>
+      <span class="relative cursor-pointer hover:text-gray-900">
+        <i class="fas fa-cog"></i>
+      </span>
+      <span class="relative cursor-pointer hover:text-gray-900">
+      </span>
+    </div>
+  </nav>
+
+  <!-- Conteúdo da página -->
+  <main class="p-6 mt-4">
+    {% block content %}
+    <!-- conteúdo individual de cada página -->
+    {% endblock %}
+  </main>
+
+</body>
+</html>
