@@ -5,15 +5,19 @@ from page.models import Page
 from accounts.views import success
 
 def post_create(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
     if request.method == 'POST':
         form = PageForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect('success')
+            return redirect('post_feed')
     else:
         form = PageForm()
+    
     return render(request, 'page/post_create.html', {'form': form})
             
 def post_feed(request):
@@ -38,3 +42,9 @@ def post_edit(request, page_id):
         form = PageForm(instance=page)
         
     return render(request, 'page/post_edit.html', {'form': form})
+
+def post_delete(request, page_id):
+    page = Page.objects.get(pk=page_id)
+    page.delete()
+    return redirect('user_post')    
+            

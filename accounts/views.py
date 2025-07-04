@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from accounts.models import CustomUser
 from accounts.forms import CustomUserForm, CustomAuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 
@@ -23,10 +24,22 @@ def account_login(request):
             
             if user is not None:
                 login(request, user)
-                return redirect('success')
+                return redirect('post_feed')
     else:
         form = CustomAuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
-
 def success(request):
     return render(request, 'accounts/success.html')
+
+def account_edit(request, user_id):
+    if request.user.is_authenticated:
+        user = CustomUser.objects.get(pk=user_id)
+        if request.method == 'POST':
+            form = CustomUserForm(request.POST, instance=user)
+            if form.is_valid():
+                form.save()
+                return redirect('user_post')
+        else:
+            form = CustomUserForm(instance=user)
+            
+        return render(request, 'accounts/account_edit.html', {'form': form})
