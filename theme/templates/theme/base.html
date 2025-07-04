@@ -32,13 +32,14 @@
       </a>
       </span>
       <span class="cursor-pointer hover:text-gray-900">
-        <a href="{% url 'success' %}">
-          <i class="fas fa-calendar-alt"></i>
+        <a href="{% url 'post_create' %}">
+          <i class="fas fa-plus"></i>
         </a>
       </span>
       <span class="relative cursor-pointer hover:text-gray-900">
-        <i class="fas fa-cog"></i>
-      </span>
+        <a href="{% url 'account_edit' user.id %}">
+          <i class="fas fa-cog"></i>
+        </a>
       <span class="relative cursor-pointer hover:text-gray-900">
       </span>
     </div>

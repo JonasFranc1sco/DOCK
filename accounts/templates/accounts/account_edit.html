@@ -1,0 +1,21 @@
+{% extends "theme/base.html" %}
+{% block content %}
+<div class="form-portion bg-stone-50 sm:w-[80%] w-[90%] mx-auto rounded-lg shadow-lg">
+    <div class="p-5 mt-5">
+        <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Edit your profile</h2>
+        
+        <form method="post" action="{% url 'account_edit' user.id %}">
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+
+            <div class="btn mt-6 w-full bg-transparent flex items-center">
+                <button type="submit"
+                    class="px-6 py-3 mx-auto rounded-xl text-center text-xl bg-black text-white hover:text-black hover:bg-white hover:font-bold hover:shadow-xl transition-all duration-300">
+                    Edit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
