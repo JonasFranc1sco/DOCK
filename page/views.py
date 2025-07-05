@@ -21,7 +21,7 @@ def post_create(request):
     return render(request, 'page/post_create.html', {'form': form})
             
 def post_feed(request):
-    posts = Page.objects.select_related('author').all().order_by('-publication_date')
+    posts = Page.objects.filter(public_access=True).order_by('-publication_date')
     return render(request, 'page/post_feed.html', {'posts': posts})
 
 def user_post(request):

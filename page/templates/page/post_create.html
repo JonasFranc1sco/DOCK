@@ -44,6 +44,20 @@
                     </div>
                 {% endif %}
             </div>
+
+            <div class="mb-6">
+                <div class="flex items-center">
+                    <label for="{{ form.public_access.id_for_label }}" class="ml-2 text-lg text-gray-700">
+                        Public access date
+                    </label>
+                    {{ form.public_access_date }}
+                </div>
+                {% if form.public_access_date.errors %}
+                    <div class="text-red-600 text-sm mt-1">
+                        {{ form.da.errors }}
+                    </div>
+                {% endif %}
+            </div>
             
             {% if form.non_field_errors %}
                 <div class="mb-4 text-red-600">
