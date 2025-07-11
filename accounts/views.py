@@ -9,7 +9,7 @@ def account_register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('success')
+            return redirect('feed')
     else:
         form = CustomUserForm()
     return render(request, 'accounts/register.html', {'form': form})
@@ -28,6 +28,7 @@ def account_login(request):
     else:
         form = CustomAuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
+
 def success(request):
     return render(request, 'accounts/success.html')
 
@@ -43,3 +44,8 @@ def account_edit(request, user_id):
             form = CustomUserForm(instance=user)
             
         return render(request, 'accounts/account_edit.html', {'form': form})
+    
+def account_delete(request, user_id):
+    user = CustomUser.objects.get(pk=user_id)
+    user.delete()
+    redirect('register')
