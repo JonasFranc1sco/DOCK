@@ -5,18 +5,18 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 class CustomUserForm(UserCreationForm):
     password1 = forms.CharField(
-        label="Senha",
+        label="Password",
         widget=forms.PasswordInput(attrs={
             "class":"bg-stone-100 px-4 py-2 outline-none rounded-md w-full",
-            "placeholder": "Sua senha"
+            "placeholder": "Your password"
         })
     )
     
     password2 = forms.CharField(
-        label="Senha",
+        label="Confirm password",
         widget=forms.PasswordInput(attrs={
             "class":"bg-stone-100 px-4 py-2 outline-none rounded-md w-full",
-            "placeholder": "Sua senha"
+            "placeholder": "Confirm your password"
         })
     )
     

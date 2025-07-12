@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from accounts.views import account_register, account_login, success, account_edit
+from accounts.views import account_register, account_login, success, account_edit, home
 from page.views import post_create, post_feed, user_post, post_edit, post_delete
 urlpatterns = [
+    path('', home, name='home'),
     path('__reload__/', include("django_browser_reload.urls")),
     path('admin/', admin.site.urls),
     path('register/', account_register, name='register'),
