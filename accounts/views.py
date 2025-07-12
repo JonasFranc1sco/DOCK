@@ -32,6 +32,9 @@ def account_login(request):
 def success(request):
     return render(request, 'accounts/success.html')
 
+def home(request):
+    return render(request, 'accounts/home.html')
+
 def account_edit(request, user_id):
     if request.user.is_authenticated:
         user = CustomUser.objects.get(pk=user_id)

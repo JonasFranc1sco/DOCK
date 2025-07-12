@@ -2,26 +2,29 @@
 {% load static tailwind_tags %}
 
 {% block content %}
-<div class="max-w-2xl mx-auto px-4 py-6 space-y-6">
+<div class="max-w-2xl mx-auto px-4 py-8 space-y-8">
 
   {% for page in posts %}
-  <div class="bg-white border border-zinc-200 rounded-xl shadow-sm p-5 space-y-3">
+  <div class="bg-gray-50 border border-zinc-300 rounded-2xl shadow-md p-6 space-y-4 relative">
 
-    <!-- Cabeçalho: autor + data -->
-    <div class="flex items-center justify-between text-sm text-zinc-500">
-      <div class="flex items-center space-x-3">
-        <div class="h-10 w-10 rounded-full bg-slate-400"></div>
-        <div>
-          <div class="text-orange-500 font-semibold">{{ page.author.myname | title }}</div>
-          <div class="text-xs text-neutral-400">{{ page.publication_date }}</div>
-        </div>
-      </div>
+    <!-- Data no topo direito estilo diário -->
+    <div class="absolute top-3 right-5 text-xs text-zinc-400 italic">
+      {{ page.publication_date }}
     </div>
 
-    <!-- Conteúdo -->
-    <div class="space-y-2">
-      <h2 class="text-lg font-semibold text-zinc-800">{{ page.title }}</h2>
-      <p class="text-sm text-zinc-600 whitespace-pre-line">{{ page.content }}</p>
+    <!-- Título com estilo manuscrito -->
+    <h2 class="text-2xl font-serif font-bold text-black">
+      {{ page.title }}
+    </h2>
+
+    <!-- Conteúdo com fonte mais cursiva e espaçada -->
+    <p class="text-base text-zinc-700 leading-relaxed whitespace-pre-line font-[Georgia]">
+      {{ page.content }}
+    </p>
+
+    <!-- Assinatura -->
+    <div class="text-right text-sm italic text-orange-400 mt-4">
+      - {{ page.author.myname | title }}
     </div>
 
   </div>
