@@ -2,6 +2,13 @@ from django import forms
 from page.models import Page
 
 class PageForm(forms.ModelForm):
+    
+    public_access_date = forms.DateField(
+        input_formats=['%d/%m/%Y'],
+        widget= forms.DateInput(attrs={
+                'class': 'w-55 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent',
+                'placeholder': 'dia/mês/ano'
+    }))
     class Meta:
         model = Page
         fields = ['title', 'content', 'public_access', 'public_access_date']
@@ -17,10 +24,6 @@ class PageForm(forms.ModelForm):
             }),
             'public_access': forms.CheckboxInput(attrs={
                 'class': 'w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2'
-            }),
-            'public_access_date': forms.DateInput(attrs={
-                'class': 'w-55 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent',
-                'placeholder': 'Put the publication date'
             }),
         }
         labels = {
