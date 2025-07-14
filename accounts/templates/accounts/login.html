@@ -5,17 +5,17 @@
 {% load tailwind_tags %}
         <!-- Lado direito - Formulário -->
         <div class="md:w-1/2 bg-gray-50 p-10">
-          <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Sign up</h2>
+          <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Log in</h2>
           <form method="post" class="space-y-4" autocomplete="off">
             {% csrf_token %}
             
                 <div>
-                  <label class="block text-gray-700 font-semibold mb-1">Your Name</label>
+                  <label class="block text-gray-700 font-semibold mb-1">Seu email</label>
                     {{ form.username }}
                 </div>
                 
                 <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Password</label>
+                    <label class="block text-gray-700 font-semibold mb-1">Sua senha</label>
                     {{ form.password }}
                   </div>
                   
@@ -24,7 +24,7 @@
                 </button>
                 <a href="{% url 'register' %}">
                   <span class="text-lg text-gray-700 font-medium hover:underline cursor-pointer">
-                  Create an account
+                  Não tem conta? Crie uma agora!
                   </span>
                 </a>
             </form>
