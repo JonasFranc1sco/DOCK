@@ -8,6 +8,13 @@ def post_create(request):
     if not request.user.is_authenticated:
         return redirect('login')
     
+    
+    return render(request, 'page/post_create.html', {'form': form})
+            
+def post_feed(request):
+    my_posts = Page.objects.filter(author=request.user).order_by('-publication_date')
+    posts = Page.objects.filter(public_access=True).order_by('-publication_date')
+    
     if request.method == 'POST':
         form = PageForm(request.POST)
         if form.is_valid():
@@ -17,12 +24,12 @@ def post_create(request):
             return redirect('post_feed')
     else:
         form = PageForm()
-    
-    return render(request, 'page/post_create.html', {'form': form})
-            
-def post_feed(request):
-    posts = Page.objects.filter(public_access=True).order_by('-publication_date')
-    return render(request, 'page/post_feed.html', {'posts': posts})
+        
+    return render(request, 'page/post_feed.html', {
+        'posts': posts, 
+        'my_posts': my_posts,
+        'form': form
+        })
 
 def user_post(request):
     if request.user.is_authenticated:
