@@ -14,12 +14,12 @@ class PageForm(forms.ModelForm):
         fields = ['title', 'content', 'public_access', 'public_access_date']
         widgets = {
             'title': forms.TextInput(attrs={
-                'class': 'w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent',
+                'class': 'w-full px-4 py-3 rounded-xl border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-zinc-400',
                 'placeholder': 'Digite o título da sua página...'
             }),
             'content': forms.Textarea(attrs={
-                'class': 'w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none',
-                'rows': 18,
+                'class': 'w-full px-4 py-3 rounded-xl border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-zinc-400 resize-none',
+                'rows': 10,
                 'placeholder': 'Escreva o conteúdo da sua página aqui...'
             }),
             'public_access': forms.CheckboxInput(attrs={

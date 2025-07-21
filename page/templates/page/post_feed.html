@@ -2,33 +2,70 @@
 {% load static tailwind_tags %}
 
 {% block content %}
-<div class="max-w-2xl mx-auto px-4 py-8 space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 px-2">
 
-  {% for page in posts %}
-  <div class="bg-gray-50 border border-zinc-300 rounded-2xl shadow-md p-6 space-y-4 relative">
-
-    <!-- Data no topo direito estilo diário -->
-    <div class="absolute top-3 right-5 text-xs text-zinc-400 italic">
-      {{ page.publication_date }}
+  <!-- Seus Posts -->
+  <div class="col-span-1">
+    <div class="bg-zinc-900 p-4">
+      <h2 class="text-zinc-400 text-lg font-semibold text-center mb-2">Seus posts</h2>
+      {% for page in my_posts %}
+        <div class=" mb-2">
+          <a href="{% url 'post_edit' page.id %}">
+            <p class="text-sm underline text-center text-zinc-200 font-bold">{{ page.title }}</p>
+          </a>
+        </div>
+      {% empty %}
+        <p class="text-sm text-gray-400 text-center">Você ainda não escreveu nada.</p>
+      {% endfor %}
     </div>
-
-    <!-- Título com estilo manuscrito -->
-    <h2 class="text-2xl font-serif font-bold text-black">
-      {{ page.title }}
-    </h2>
-
-    <!-- Conteúdo com fonte mais cursiva e espaçada -->
-    <p class="text-base text-zinc-700 leading-relaxed whitespace-pre-line font-[Georgia]">
-      {{ page.content }}
-    </p>
-
-    <!-- Assinatura -->
-    <div class="text-right text-sm italic text-orange-400 mt-4">
-      - {{ page.author.myname | title }}
-    </div>
-
   </div>
-  {% endfor %}
+
+  <!-- Feed central -->
+  <div class="col-span-2">
+    <div class="max-w-2xl mx-auto px-4 py-8 space-y-4">
+      <div class="bg-zinc-800 p-4 mb-6">
+      <h2 class="text-orange-600 text-lg font-bold mb-2">Criar nova página</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="mt-2 px-4 py-2 bg-orange-600 text-white rounded">Publicar</button>
+      </form>
+      </div>
+      {% for page in posts %}
+      <div class="bg-zinc-800 shadow-md p-6 space-y-4 relative">
+
+        <!-- Data no topo direito estilo diário -->
+        <div class="absolute top-3 right-5 text-xs text-zinc-400 italic">
+          {{ page.publication_date }}
+        </div>
+
+        <!-- Título com estilo manuscrito -->
+        <h2 class="text-2xl font-serif font-bold text-zinc-300">
+          {{ page.title }}
+        </h2>
+
+        <!-- Conteúdo com fonte mais cursiva e espaçada -->
+        <p class="text-base text-zinc-200 leading-relaxed whitespace-pre-line font-[Georgia]">
+          {{ page.content }}
+        </p>
+
+        <!-- Assinatura -->
+        <div class="text-right text-sm italic text-orange-400 mt-4">
+          - {{ page.author.myname | title }}
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Seguindo -->
+  <div class="col-span-1">
+    <div class="bg-zinc-900 p-4">
+      <h2 class="text-blue-600 text-lg font-semibold text-center mb-2">Seguindo</h2>
+      <p class="text-sm text-gray-400 text-center">Funcionalidade em breve...</p>
+    </div>
+  </div>
 
 </div>
 {% endblock content %}
