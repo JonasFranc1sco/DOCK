@@ -3,13 +3,6 @@ from page.forms import PageForm
 from django.utils import timezone
 from page.models import Page
 from accounts.views import success
-
-def post_create(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-    
-    
-    return render(request, 'page/post_create.html', {'form': form})
             
 def post_feed(request):
     my_posts = Page.objects.filter(author=request.user).order_by('-publication_date')
@@ -33,7 +26,7 @@ def post_feed(request):
 
 def user_post(request):
     if request.user.is_authenticated:
-        posts = Page.objects.filter(author=request.user)
+        posts = Page.objects.filter(author=request.user).order_by('-publication_date')
     else:
         return redirect('login')
     return render(request, 'page/user_posts.html', {'posts': posts})
