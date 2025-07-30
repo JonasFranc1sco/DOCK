@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from accounts.views import account_register, account_login, success, account_edit, home
-from page.views import post_create, post_feed, user_post, post_edit, post_delete
+from page.views import post_feed, user_post, post_edit, post_delete
 urlpatterns = [
     path('', home, name='home'),
     path('__reload__/', include("django_browser_reload.urls")),
@@ -25,7 +25,6 @@ urlpatterns = [
     path('register/', account_register, name='register'),
     path('login/', account_login, name='login'),
     path('success/', success, name='success'),
-    path('post/', post_create, name='post_create'),
     path('feed/', post_feed, name='post_feed'),
     path('myfeed/', user_post, name='user_post'),
     path('post/edit/<int:page_id>', post_edit, name='post_edit'),

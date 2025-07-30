@@ -6,32 +6,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clory</title>
+    <title>Dock</title>
     <link rel="icon" type="image/x-icon" href="{% static 'img/website_icon.png' %}">
 
     {% tailwind_css %}
   </head>
-  <body class="bg-[#f5f6f8] font-sans">
+  <body class="bg-zinc-800 font-sans">
 
     <div class="min-h-screen flex items-center justify-center">
-      <div class="bg-white w-full max-w-4xl rounded-xl shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2">
+      <div class="bg-zinc-900 w-full max-w-4xl rounded-xl shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2">
 
         <!-- Lado esquerdo: imagem -->
-        <div class="flex items-center justify-center bg-white p-10">
+        <div class="flex items-center justify-center bg-zinc-900 p-10">
           <img src="{% static 'img/website_icon.png' %}" alt="Logo" class="w-100 h-100 object-contain">
         </div>
 
         <!-- Lado direito: conteúdo -->
         <div class="p-10 flex flex-col justify-center">
-          <h1 class="text-3xl font-bold text-gray-800 mb-2">Bem-vindo à Clory</h1>
-          <p class="text-gray-500 mb-6">Seu espaço pessoal para escrever, anotar e guardar momentos importantes. Mostre-os ao mundo no seu tempo⏳!</p>
+          <h1 class="text-3xl font-bold text-white mb-2">Bem-vindo ao Dock</h1>
+          <p class="text-gray-50 mb-6">Escreva sobre suas ideias, viagens, pensamentos, rotinas. Libere sua mente 🧠📙🖋️</p>
 
           <div class="space-y-4">
             <a href="{% url 'login' %}" class="w-full block text-center bg-orange-600 text-white py-3 rounded-lg hover:bg-red-600 transition">
               Acessar Diário
             </a>
-            <a href="{% url 'register' %}" class="w-full block text-center border border-orange-600 text-red-600 py-3 rounded-lg hover:bg-blue-50 transition">
-              Nova Conta
+            <a href="{% url 'register' %}" class="w-full block text-center border bg-zinc-900 border-orange-600 text-red-600 py-3 rounded-lg hover:bg-zinc-950 transition">
+              Criar Diário
             </a>
           </div>
 
