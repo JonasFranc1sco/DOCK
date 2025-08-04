@@ -5,18 +5,23 @@ from page.models import Page
 from accounts.views import success
             
 def post_feed(request):
-    my_posts = Page.objects.filter(author=request.user).order_by('-publication_date')
-    posts = Page.objects.filter(public_access=True).order_by('-publication_date')
-    
-    if request.method == 'POST':
-        form = PageForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect('post_feed')
+    if request.user.is_authenticated:
+        my_posts = Page.objects.filter(author=request.user).order_by('-publication_date')
+        posts = Page.objects.filter(public_access=True).order_by('-publication_date')
+        
+        if request.method == 'POST':
+            form = PageForm(request.POST)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.author = request.user
+                if not post.title:
+                    post.title = timezone.now().date().strftime('%d/%m/%Y')
+                post.save()
+                return redirect('post_feed')
+        else:
+            form = PageForm()
     else:
-        form = PageForm()
+        return redirect('login')
         
     return render(request, 'page/post_feed.html', {
         'posts': posts, 

@@ -1,7 +1,3 @@
-
-
-
-
 {% extends "theme/base.html" %}
 {% load static tailwind_tags %}
 
@@ -9,24 +5,27 @@
 <div class="max-w-2xl mx-auto px-4 py-8 space-y-8">
 
   {% for page in posts %}
-  <div class="bg-gray-50 border border-zinc-300 rounded-2xl shadow-md p-6 space-y-4 relative">
-    <!-- Data no topo direito estilo diário -->
-    <div class="absolute top-3 right-5 text-xs text-zinc-400 italic">
-      {{ page.publication_date }}
-    </div>
+<div class="bg-zinc-800 shadow-md p-6 space-y-4 relative">
 
-    <!-- Título com estilo manuscrito -->
-    <h2 class="text-2xl font-serif font-bold text-black">
-      {{ page.title }}
-    </h2>
+        <!-- Data no topo direito estilo diário -->
+        <div class="absolute top-3 right-5 text-xs text-zinc-400 italic">
+          {{ page.publication_date }}
+        </div>
 
-    <!-- Conteúdo com fonte mais cursiva e espaçada -->
-    <p class="text-base break-words text-zinc-700 leading-relaxed whitespace-pre-line font-[Georgia]">
-      {{ page.content }}
-    </p>
+        <!-- Título com estilo manuscrito -->
+        <h2 class="text-2xl font-serif font-bold text-zinc-300">
+          {{ page.title }}
+        </h2>
+
+        <!-- Conteúdo com fonte mais cursiva e espaçada -->
+        <p class="text-xl break-words text-zinc-200 leading-relaxed whitespace-pre-line font-[Georgia]">
+          {{ page.content }}
+        </p>
 
       <div class="text-right text-sm italic mt-4">
-        <a href="{% url 'post_edit' page.id %}" name="edit_button">Editar</a>
+        <a href="{% url 'post_edit' page.id %}">
+          <i class="fas fa-edit text-blue-600"></i>
+        </a>
         <a href="{% url 'post_delete' page.id %}">
           <i class="fas fa-trash text-red-500"></i>
         </a>
