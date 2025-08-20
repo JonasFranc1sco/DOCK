@@ -1,0 +1,70 @@
+    /* ajustes finos que não existem direto em classes Tailwind */
+    /* Botão oval grande */
+    .big-oval {
+      width: 520px;
+      height: 56px;
+      border-radius: 9999px;
+      border: 2px solid rgba(165,165,165,0.45);
+      backdrop-filter: blur(4px);
+    }
+
+    .big-oval-send {
+      width: 520px;
+      height: 56px;
+      border-radius: 9999px;
+      border: 2px solid rgba(255, 72, 0, 0);
+      backdrop-filter: blur(4px);
+    }
+    /* sombra suave do cartão */
+    .card-shadow {
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    }
+    /* glow atrás do avatar (pequeno) */
+    .avatar-glow {
+      box-shadow: 0 0 18px;
+    }
+
+    /* círculo branco com seta */
+    .next-circle {
+      width:44px;
+      height:44px;
+      border-radius:9999px;
+      background:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    }
+
+    .next-circle-user {
+      width:30px;
+      height:30px;
+      border-radius:9999px;
+      background:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    }
+
+    .plus-circle {
+      width:30px;
+      height:30px;
+      border-radius:9999px;
+      background: rgb(0, 0, 0);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    }
+
+    .update-circle-user {
+      width:30px;
+      height:30px;
+      border-radius:9999px;
+      background: rgb(247, 127, 29);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    }

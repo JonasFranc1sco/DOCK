@@ -1,0 +1,44 @@
+{% extends "theme/base.html" %}
+{% block content %}
+<div class="min-h-screen flex items-center justify-center p-10">
+    <div class="w-full max-w-md">
+        <h1 class="text-5xl font-extrabold text-center mb-8">
+          Edite seu diário
+        </h1>
+        
+        <form method="post" class="space-y-8 bg-zinc-900 rounded-2xl p-8" autocomplete="off">
+            {% csrf_token %}
+            
+            <div>
+                {{ form.name }}
+            </div>
+
+            <div x-data="{ checked: false }">
+                <label class="flex items-center gap-3 cursor-pointer">
+                    {{ form.public_access }}
+                    
+                    <span class="w-6 h-6 flex items-center justify-center border-2 border-gray-400 rounded peer-checked:bg-blue-600 peer-checked:border-blue-600">
+                        <svg class="hidden w-4 h-4 text-white peer-checked:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </span>
+                    
+                    <span class="text-white font-bold"> Tornar público </span>
+                </label>
+
+                <div x-show="!checked" class="mt-4 transition-all duration-300">
+                    <div class="w-full">
+                        {{ form.public_access_date }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full flex justify-center">
+                <button type="submit" class="big-oval-send rounded-md bg-orange-600 hover:bg-red-600 text-white text-lg transition-colors duration-300">
+                    Salvar Alterações
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

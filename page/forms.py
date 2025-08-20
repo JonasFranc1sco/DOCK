@@ -1,39 +1,46 @@
 from django import forms
-from page.models import Page
+from page.models import Page, Diary
 
 class PageForm(forms.ModelForm):
+    class Meta:
+        model = Page
+        fields = ['title', 'content']
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'placeholder': 'Nome da página',
+                'class': 'w-full bg-transparent text-white text-2xl font-bold text-center border-none outline-none placeholder-gray-500 focus:outline-none'
+            }),
+            'content': forms.Textarea(attrs={
+                'placeholder': 'Conteúdo da página',
+                'rows': 10,
+                'class':"w-full h-full resize-none text-3xl text-white font-bold border-none rounded-xl p-4 focus:outline-none"})
+        }
 
+class DiaryForm(forms.ModelForm):
     public_access_date = forms.DateField(
         required=False,
         input_formats=['%d/%m/%Y'],
         widget=forms.DateInput(
             format='%d/%m/%Y',
             attrs={
-                'class': 'px-2 py-1 rounded bg-zinc-800 text-xl text-white focus:ring focus:ring-blue-400 focus:outline-none',
-                'placeholder': 'dia/mês/ano',
-                'type': 'text' 
+                "class": "w-full rounded-lg border-gray-300",
+                'placeholder': 'Data de acesso público (Opcional)',
+                'class': 'w-full bg-transparent text-white text-xl font-bold border-none outline-none placeholder-gray-500 focus:outline-none'
             }
         )
     )
+
     class Meta:
-        model = Page
-        fields = ['title', 'content', 'public_access', 'public_access_date']
+        model = Diary
+        fields = ['name', 'public_access']
         widgets = {
-            'title': forms.TextInput(attrs={
-                'class': 'w-full px-2 py-1 rounded  bg-zinc-800 text-xl text-white focus:ring focus:ring-blue-400 focus:outline-none',
-                'placeholder': 'Título da página'
-            }),
-            'content': forms.Textarea(attrs={
-                'class': 'w-full px-2 py-1 rounded  bg-zinc-800 text-xl text-white resize-none focus:ring focus:ring-blue-400 focus:outline-none',
-                'rows': 6,
-                'placeholder': 'Conteúdo da página...'
-            }),
-            'public_access': forms.CheckboxInput(attrs={
-                'class': 'w-4 h-4 text-blue-500 focus:ring-blue-400 focus:ring'
-            }),
-        }
-        labels = {
-            'title': 'Título',
-            'content': 'Conteúdo',
-            'public_access': 'Tornar página pública'
+            'name': forms.TextInput(attrs={
+                'placeholder': 'Nome do diário',
+                'class': 'w-full bg-transparent text-white text-3xl font-bold text-center border-none outline-none placeholder-gray-500 focus:outline-none'}),
+            
+            "public_access": forms.CheckboxInput(attrs={
+                "x-model": "checked",   # Alpine.js binding
+                "id": "id_public_access",
+                "class": "peer hidden",
+            })
         }

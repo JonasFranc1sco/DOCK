@@ -7,51 +7,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Dock{% endblock %}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/x-icon" href="{% static 'img/website_icon.png' %}">
-
+  <link rel="stylesheet" href="{% static 'css/feed.css' %}">
+  <script src="{% static 'js/alpine.min.js' %}" defer></script>
   {% tailwind_css %}
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-zinc-900 min-h-screen">
+<body class="bg-zinc-800 text-white min-h-screen font-sans">
 
-  <!-- Navbar fixa no topo -->
-  <nav class="bg-zinc-900 px-6 py-3 shadow-xl/30 font-serif">
-
-  <div class="flex justify-between items-center max-w-6xl mx-auto">
-
-    <!-- Logo + Título -->
-    <div class="flex items-center space-x-4" >
-      <img src="{% static 'img/website_icon.png' %}" alt="Logo" class="w-14 h-14">
-        <a href="{% url 'post_feed' %}">
-      <span class="text-2xl font-bold text-white tracking-wider">Dock</span>
+  <div class="flex">
+    <!-- Sidebar -->
+<aside class="w-20 bg-zinc-900 h-screen fixed left-0 top-0 flex flex-col items-center py-6 z-40">
+  
+  <!-- Área central com F, M e avatar -->
+  <div class="flex-1 flex flex-col items-center justify-center gap-8">
+    <!-- Letras verticais (F M) -->
+    <div class="flex flex-col items-center gap-8">
+      <a href="{% url 'diary_create' %}" class="fas fa-plus text-3xl tracking-wider transition-transform duration-200 hover:scale-125 hover:text-gray-300"></a>
+      <a href="{% url 'user_diaries' %}" class="fas fa-folder text-3xl tracking-wider transition-transform duration-200 hover:scale-125 hover:text-gray-300"></a>
+      <a href="{% url 'feed' %}" class= "fas fa-fire-alt text-3xl tracking-wider transition-transform duration-200 hover:scale-125 text-amber-300 hover:text-orange-400"></a>
     </div>
 
-    <!-- Links -->
-    <div class="flex items-center space-x-8 text-zinc-400 text-base">
-      <a href="{% url 'post_feed' %}" class="hover:text-zinc-200 transition flex flex-col items-center">
-        <i class="fas fa-stream text-xl"></i>
-        <span class="text-xs mt-1">Feed</span>
-      </a>
-      <a href="{% url 'user_post' %}" class="hover:text-zinc-200 transition flex flex-col items-center">
-        <i class="fas fa-book text-xl"></i>
-        <span class="text-xs mt-1">Meus</span>
-      </a>
-      <a href="{% url 'account_edit' user.id %}" class="hover:text-zinc-200 transition flex flex-col items-center">
-        <i class="fas fa-cog text-xl"></i>
-        <span class="text-xs mt-1">Conta</span>
-      </a>
-    </div>
-
+    <!-- avatar pequeno -->
+    <a href="{% url 'account_edit' user.id %}">
+      <img src="{% url 'serve_avatar' user.id %}" alt="Avatar" class="w-9 h-9 rounded-full avatar-glow object-cover"/>
+    </a>
   </div>
 
-</nav>
+  <!-- Ícone de fogo no final -->
+  <div class="mb-8">
+    <!-- ícone de fogo estilizado - substitua pelo seu asset -->
+    <img src="{% static 'img/website_icon.png' %}" alt="fire" class="w-20 h-20 object-contain"/>
+  </div>
+</aside>
 
-  <!-- Conteúdo da página -->
-  <main class="p-2 mt-2">
-    {% block content %}
-    <!-- conteúdo individual de cada página -->
-    {% endblock %}
-  </main>
+ <div class="ml-20 flex-1">
+    {% block content%}
+    {% endblock content%}
+  </div>
+</div>
 
 </body>
 </html>

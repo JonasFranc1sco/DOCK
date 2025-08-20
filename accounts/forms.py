@@ -1,4 +1,5 @@
 from django import forms
+from PIL import Image
 from accounts.models import CustomUser
 from diary import settings
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -19,16 +20,44 @@ class CustomUserForm(UserCreationForm):
             "placeholder": "Confirm your password"
         })
     )
+
+    birthday = forms.DateField(
+        required=True,
+        input_formats=['%d/%m/%Y'],
+        widget=forms.DateInput(
+            format='%d/%m/%Y', attrs={
+                "class": "bg-stone-100 px-4 py-2 outline-none rounded-md w-full", "placeholder": "Ex: 19/11/2005"
+                })
+    )
+    avatar = forms.ImageField(
+            required=False,
+            widget=forms.ClearableFileInput(attrs={"class": "bg-stone-100 px-4 py-2 outline-none rounded-md w-full", "placeholder": "Importe sua foto aqui"})
+        )
     
     class Meta:
         model = CustomUser
-        fields = ['email', 'myname', 'birthday']
+        fields = ['email', 'real_name', 'user_name','avatar']
         widgets = {
-            'myname': forms.TextInput(attrs={"class": "bg-stone-100 px-4 py-2 outline-none rounded-md w-full", "placeholder": "Type your name"}),
-            'birthday': forms.DateInput(attrs={"class": "bg-stone-100 px-4 py-2 outline-none rounded-md w-full", "placeholder": "Ex: 19/11/2005"}),
+            'real_name': forms.TextInput(attrs={"class": "bg-stone-100 px-4 py-2 outline-none rounded-md w-full", "placeholder": "Type your real name"}),
+            'user_name': forms.TextInput(attrs={"class": "bg-stone-100 px-4 py-2 outline-none rounded-md w-full", "placeholder": "Type your username"}),
             'email': forms.EmailInput(attrs={"class": "bg-stone-100 px-4 py-2 outline-none rounded-md w-full", "placeholder": "Type your email"}),
         }
         
 class CustomAuthenticationForm(AuthenticationForm):
     username = forms.EmailField(widget=forms.EmailInput(attrs={"class": "bg-stone-100 px-4 py-2 outline-none rounded-md w-full", "placeholder": "Your email"}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={"class": "bg-stone-100 px-4 py-2 outline-none rounded-md w-full", "placeholder": "Your password"}))
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['real_name', 'user_name', 'avatar']
+        widgets = {
+            'real_name': forms.TextInput(attrs={"class": "bg-gray-700 text-white px-4 py-2 rounded-md w-full", "placeholder": "Nome"}),
+            'user_name': forms.TextInput(attrs={"class": "bg-gray-700 text-white px-4 py-2 rounded-md w-full", "placeholder": "Usuário"}),
+            'avatar': forms.ClearableFileInput(attrs={"class": "bg-gray-700 text-white"})
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['avatar'].widget.clear_checkbox_label = None
+

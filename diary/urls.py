@@ -16,18 +16,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from accounts.views import account_register, account_login, success, account_edit, home
-from page.views import post_feed, user_post, post_edit, post_delete
+from django.conf import settings
+from django.conf.urls.static import static
+from accounts.views import account_register, account_login, success, account_edit, home, serve_avatar, account_logout
+from page.views import feed, user_diaries, page_update, page_delete, diary_update, diary_delete, diary_create, page_add, diary_view
 urlpatterns = [
     path('', home, name='home'),
     path('__reload__/', include("django_browser_reload.urls")),
     path('admin/', admin.site.urls),
     path('register/', account_register, name='register'),
     path('login/', account_login, name='login'),
+    path('logout/', account_logout, name='logout'),
     path('success/', success, name='success'),
-    path('feed/', post_feed, name='post_feed'),
-    path('myfeed/', user_post, name='user_post'),
-    path('post/edit/<int:page_id>', post_edit, name='post_edit'),
-    path('post/delete/<int:page_id>', post_delete, name='post_delete'),
-    path('account/edit/<int:user_id>', account_edit, name="account_edit")
+    path('feed/', feed, name='feed'),
+    path('diary/create/', diary_create, name='diary_create'),
+    path('feed/personal/', user_diaries, name='user_diaries'),
+    path('page/edit/<int:page_id>/', page_update, name='page_edit'),
+    path('page/add/<int:diary_id>/', page_add, name='page_add'),
+    path('page/delete/<int:page_id>/', page_delete, name='page_delete'),
+    path('diary/update/<int:diary_id>/', diary_update, name='diary_update'),
+    path('diary/delete/<int:diary_id>/', diary_delete, name='diary_delete'),
+    path('account/edit/<int:user_id>/', account_edit, name="account_edit"),
+    path('diary/view/<int:diary_id>/', diary_view, name='diary_view'),
+    path('avatar/<int:user_id>/', serve_avatar, name='serve_avatar'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

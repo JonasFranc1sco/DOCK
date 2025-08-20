@@ -1,19 +1,63 @@
 {% extends "theme/base.html" %}
-{% block content %}
-<div class="form-portion bg-stone-50 sm:w-[80%] w-[90%] mx-auto rounded-lg shadow-lg">
-    <div class="p-5 mt-5">
-        <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Editar seu perfil</h2>
-        
-        <form method="post" action="{% url 'account_edit' user.id %}">
-            {% csrf_token %}
-            
-            {{ form.as_p }}
+{% load static %}
 
-            <div class="btn mt-6 w-full bg-transparent flex items-center">
-                <button type="submit"
-                    class="px-6 py-3 mx-auto rounded-xl text-center text-xl bg-black text-white hover:text-black hover:bg-white hover:font-bold hover:shadow-xl transition-all duration-300">
-                    Editar
+{% block content %}
+<div class="flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-4xl p-10 rounded-2xl shadow-lg bg-zinc-900 flex flex-col md:flex-row gap-8">
+
+        <!-- Form envolvendo TUDO -->
+        <form method="POST" enctype="multipart/form-data" class="w-full flex flex-col md:flex-row gap-8">
+            {% csrf_token %}
+
+            <!-- Lado esquerdo: Avatar -->
+            <div class="flex flex-col items-center md:items-start gap-6 w-full md:w-1/3">
+                {% if user.avatar %}
+                    <img class="rounded-full w-96 h-96 object-cover" src="{{ user.avatar.url }}" alt="avatar">
+                {% else %}
+                    <div class="w-96 h-96 rounded-full bg-gray-700 border-4 border-gray-600 shadow-lg flex items-center justify-center text-gray-300 text-xl">
+                        Sem Foto
+                    </div>
+                {% endif %}
+
+                <div class="w-full">
+                    <label class="block text-white font-semibold mb-2">Avatar</label>
+                    {{ form.avatar }}
+                </div>
+
+                <button onclick="location.href='{% url 'logout' %}'" type="button"
+                    class="mt-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg transition duration-200">
+                    Log out
                 </button>
+            </div>
+
+            <div class="flex-1 w-full">
+                <h2 class="text-3xl font-extrabold text-white mb-8 text-center md:text-left">Editar Perfil</h2>
+
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-white font-semibold mb-2">Nome</label>
+                        {{ form.real_name }}
+                    </div>
+
+                    <div>
+                        <label class="block text-white font-semibold mb-2">Usuário</label>
+                        {{ form.user_name }}
+                    </div>
+
+                    {% if form.errors %}
+                        <div class="bg-red-600 text-white p-4 rounded-lg">
+                            <h4>Erros no formulário:</h4>
+                            {{ form.errors }}
+                        </div>
+                    {% endif %}
+
+                    <div class="flex justify-center mt-4">
+                        <button type="submit"
+                            class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-8 rounded-lg transition duration-200">
+                            Atualizar
+                        </button>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
