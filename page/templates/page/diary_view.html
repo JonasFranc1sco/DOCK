@@ -1,0 +1,143 @@
+{% extends "theme/base.html" %}
+
+{% block content %}
+<main class="flex-1 px-8 py-8">
+  
+  <!-- Botão de voltar -->
+  <div class="max-w-4xl mx-auto mb-6">
+    <a href="{% url 'user_diaries' %}" class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+      <i class="fas fa-arrow-left"></i>
+      Voltar aos seus diários
+    </a>
+  </div>
+
+  <!-- Container do diário -->
+  <div class="max-w-4xl mx-auto">
+    
+    <p class="text-gray-400 text-sm mb-3 text-center">{{ diary.diary_creation_date }}</p>
+    <!-- Botões de ação (se for o autor) -->
+    {% if is_owner %}
+      <div class="flex justify-center gap-3">
+      <a href="{% url 'page_add' diary.id %}" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg text-white font-medium transition-colors">
+        <i class="fas fa-plus mr-2"></i>Nova Página
+      </a>
+      <a href="{% url 'diary_update' diary.id %}" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-medium transition-colors">
+        <i class="fas fa-edit mr-2"></i>Editar
+      </a>
+      </div>
+    {% endif %}
+    
+    <!-- Cabeçalho do diário -->
+    <header class="rounded-xl p-8 mb-8 ">
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex-1 flex justify-center">
+          <div class="flex items-center gap-3 text-center">
+        {% if diary.author.avatar %}
+          <img src="{{ diary.author.avatar.url }}" alt="Avatar" class="w-10 h-10 rounded-full object-cover">
+        {% else %}
+          <span class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-gray-300">
+            <i class="fas fa-user"></i>
+          </span>
+        {% endif %}
+        <h2 class="text-2xl font-bold text-white">{{ diary.author.user_name }}</h2>
+          </div>
+        </div>
+        
+      </div>
+
+      <!-- Título do diário -->
+      <h3 class="text-3xl font-bold text-center text-white mb-4">
+        {{ diary.name }}
+      </h3>
+
+      <!-- Info do diário -->
+      <div class="text-center text-gray-400">
+        <span class="inline-flex items-center gap-2">
+          <i class="fas fa-book"></i>
+          {{ total_pages }} página{{ total_pages|pluralize }}
+        </span>
+        {% if diary.public_access %}
+          <span class="ml-4 inline-flex items-center gap-2 text-green-400">
+            <i class="fas fa-globe"></i>
+            Público
+          </span>
+        {% else %}
+          <span class="ml-4 inline-flex items-center gap-2 text-orange-400">
+            <i class="fas fa-lock"></i>
+            Privado
+          </span>
+        {% endif %}
+      </div>
+    </header>
+
+    <!-- Páginas do diário -->
+    <div class="space-y-8">
+      {% for page in pages %}
+        <article class="bg-zinc-900 rounded-xl p-8 card-shadow relative">
+          
+          <!-- Cabeçalho da página -->
+            <div class="flex items-center justify-between mb-6">
+            <div class="flex-1 flex justify-center">
+              <h3 class="text-2xl font-bold text-center text-white">
+              {{ page.title|default:"Sem título" }}
+              </h3>
+            </div>
+            
+            <!-- Botões de ação da página (se for o autor) -->
+            {% if is_owner %}
+              <div class="flex gap-2">
+                <a href="" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-sm transition-colors">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <button onclick="deletePage({{ page.id }})" class="px-3 py-1 bg-red-600 hover:bg-red-700 rounded text-white text-sm transition-colors">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Conteúdo da página -->
+          <div class="prose prose-invert max-w-none">
+            <div class="text-lg leading-relaxed text-gray-300 whitespace-pre-wrap break-words">
+              {{ page.content }}
+            </div>
+          </div>
+
+          <!-- Rodapé da página -->
+          <footer class="mt-6 pt-4 border-t border-gray-700 text-sm text-gray-400 text-right">
+            <span class="text-white px-4 py-1 rounded-full text-sm font-medium">
+              Página {{ page.page_num }}
+            </span>
+            Criada em {{ page.page_creation_date }}
+          </footer>
+        </article>
+      {% empty %}
+        <!-- Estado vazio -->
+        <div class="bg-zinc-900 rounded-xl p-12 text-center card-shadow">
+          <i class="fas fa-book-open text-6xl text-gray-600 mb-4"></i>
+          <h3 class="text-2xl font-bold text-white mb-2">Diário vazio</h3>
+          <p class="text-gray-400 mb-6">Este diário ainda não possui páginas.</p>
+          {% if is_owner %}
+            <a href="{% url 'page_add' diary.id %}" class="inline-flex items-center gap-2 px-8 py-3 bg-orange-600 hover:bg-orange-700 rounded-lg text-white font-medium transition-colors">
+              <i class="fas fa-plus"></i>
+              Criar primeira página
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</main>
+
+<!-- JavaScript para confirmação de exclusão -->
+<script>
+function deletePage(pageId) {
+  if (confirm('Tem certeza que deseja excluir esta página? Esta ação não pode ser desfeita.')) {
+    // Redireciona para a URL de exclusão
+    window.location.href = `/page/delete/${pageId}/`;
+  }
+}
+</script>
+
+{% endblock content %}

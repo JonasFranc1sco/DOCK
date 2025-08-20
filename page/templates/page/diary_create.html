@@ -1,0 +1,52 @@
+{% extends "theme/base.html" %}
+{% block content %}
+<div class="p-10 pt-12 mx-auto flex justify-center w-[90%] h-[90vh]">
+    <div class="rounded-xl pt-6 flex flex-col justify-between w-full h-full">
+        <h1 class="text-5xl font-extrabold text-center mb-8 flex items-center justify-center">
+          Crie seu diário
+        </h1>
+        <form method="post" class="space-y-8 flex flex-col pt-16 w-full h-full" autocomplete="off">
+            {% csrf_token %}
+            <div>
+                {{ diary_form.name }}
+            </div>
+
+            <div>
+                {{ page_form.title }}
+            </div>
+
+            <div x-data="{ checked: false }">
+                <label class="flex items-center gap-3 cursor-pointer">
+                    <!-- input real (invisível) -->
+                    {{ diary_form.public_access }}
+
+                    <span class="w-6 h-6 flex items-center justify-center border-2 border-gray-400 rounded peer-checked:bg-orange-600 peer-checked:border-orange-600">
+                        <svg class="hidden w-4 h-4 text-white peer-checked:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </span>
+
+                    <!-- texto ao lado -->
+                    <span class="text-white font-bold"> Tornar público </span>
+                </label>
+
+                <!-- Campo de data condicional -->
+                <div x-show="!checked" class="mt-4 transition-all duration-300">
+                    <div class="w-full">
+                        {{ diary_form.public_access_date }}
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                {{ page_form.content }}
+            </div>
+
+            <div class="w-full flex justify-center">
+                <button type="submit" class="big-oval-send rounded-md bg-orange-600 hover:bg-red-600 text-white text-lg transition-colors duration-300">Publicar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

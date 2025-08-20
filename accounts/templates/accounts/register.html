@@ -15,12 +15,22 @@
         <!-- Lado direito - Formulário -->
         <div class="md:w-1/2 bg-gray-200 p-10">
             <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Crie sua conta</h2>
-            <form method="post" class="space-y-4" autocomplete="off">
+            <form method="post" class="space-y-4" autocomplete="off" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <div>
                     <label class="block text-gray-700 font-semibold mb-1">Seu nome</label>
-                    {{ form.myname }}
+                    {{ form.real_name }}
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-1">Seu nome de usuário</label>
+                    {{ form.user_name }}
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-1">Sua foto de usuário</label>
+                    {{ form.avatar }}
                 </div>
 
                 <div>

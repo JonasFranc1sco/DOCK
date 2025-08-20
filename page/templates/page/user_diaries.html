@@ -1,0 +1,54 @@
+{% extends "theme/base.html" %}
+{% load static %}
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8">
+    <h1 class="text-5xl font-extrabold text-center mb-8 flex items-center justify-center">
+      Seus diários
+      <img src="{% static 'img/website_icon.png' %}" alt="fire" class="w-25 h-25 object-contain"/>
+    </h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      {% for diary in diaries %}
+      <div class="bg-zinc-900 p-6 flex flex-col break-words justify-between border border-white">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <img src="{%  url 'serve_avatar' user.id %}" 
+            alt="avatar" 
+            class="w-8 h-8 rounded-full">
+          </div>
+          <span class="text-sm text-gray-400">
+            {{ diary.diary_creation_date }}
+          </span>
+          <a href="{% url 'page_add' diary.id %}" class="plus-circle">
+            <i class="fa fa-plus text-white text-lg"></i>
+          </a>
+          <a href="{% url 'diary_update' diary.id %}" title="Editar o diário" class="update-circle-user">
+            <i class="fas fa-pen text-white text-xg"></i>
+          </a>
+          <a href="{% url 'diary_view' diary.id %}" title="Próxima página" class="next-circle-user">
+            <i class="fas fa-eye text-black text-lg"></i>
+          </a>
+        </div>
+
+        <h2 class="text-center text-lg font-bold uppercase mb-2 text-white">
+          {{ diary.name|truncatechars:29 }}
+        </h2>
+      </div>
+      {% empty %}
+        <p class="col-span-3 text-center text-gray-500 p-6 bg-[#1c1c1c] border border-orange-600/30 rounded-lg">Você ainda não criou nenhum diário.</p>
+      {% endfor %}
+    </div>
+    </div>
+</div>
+
+<!-- CSS para truncar texto -->
+<style>
+.line-clamp-5 {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
+{% endblock %}

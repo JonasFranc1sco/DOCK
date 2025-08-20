@@ -1,0 +1,57 @@
+{% extends "theme/base.html" %}
+
+{% block content %}
+<main class="flex-1 px-8 py-8">
+  
+  <!-- Botão oval grande centralizado -->
+  <div class="flex justify-center mb-8">
+    <a href="{% url 'diary_create' %}" class="big-oval flex items-center justify-center text-white text-lg font-medium transition-all duration-300 ease-in-out hover:scale-105 hover:bg-gray-700/20 hover:border-gray-300 hover:shadow-lg">
+      Começar novo diário
+    </a>
+  </div>
+
+  <!-- Feed -->
+  <div class="max-w-3xl mx-auto space-y-10">
+    {% for diary in diaries %}
+      {% with first_page=diary.pages.first %}
+      <article class="relative bg-zinc-900 rounded-xl p-6 card-shadow">
+        
+        <!-- Cabeçalho do card -->
+        <div class="grid grid-cols-3 items-center mb-4">
+          <div class="flex items-center gap-3">
+            <img src="{{ diary.author.avatar.url }}" alt="avatar" class="w-10 h-10 rounded-full object-cover"/>
+            <div class="font-semibold text-xl">{{ diary.author.user_name }}</div>
+          </div>
+
+          <div class="flex justify-center break-words">
+            <h3 class="text-2xl break-words font-bold">{{ diary.name|truncatechars:20 }}</h3>
+          </div>
+
+          <div class="text-xs text-gray-400 text-right">
+            {{ first_page.page_creation_date }}
+          </div>
+        </div>
+
+        <!-- Conteúdo -->
+        <div class="text-lg leading-relaxed text-center break-words px-6">
+          {{ first_page.content }}
+        </div>
+
+        <!-- Rodapé -->
+        <div class="absolute left-6 bottom-4 text-xs text-gray-300">
+          página {{ first_page.page_num|default:1 }}/{{ diary.pages.count }}
+        </div>
+        <!-- Botão de próxima página -->
+        <div class="absolute right-[-22px] top-1/2 transform -translate-y-1/2">
+          <a href="{% url 'diary_view' diary.id %}" title="Próxima página" class="next-circle">
+            <i class="fas fa-eye text-black text-lg"></i>
+          </a>
+        </div>
+
+      </article>
+      {% endwith %}
+    {% endfor %}
+  </div>
+
+</main>
+{% endblock content %}
