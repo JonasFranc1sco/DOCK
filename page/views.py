@@ -3,7 +3,8 @@ from page.forms import PageForm, DiaryForm
 from django.utils import timezone
 from page.models import Page, Diary
 from accounts.views import success
-            
+
+# Função listagem do Feed de publicações dos usuários
 def feed(request):
     if request.user.is_authenticated:
         my_diary = Diary.objects.filter(author=request.user).order_by('-public_access_date')
@@ -16,6 +17,7 @@ def feed(request):
         'diaries': diaries, 
         'my_diary': my_diary})
     
+# Função para criar um diário
 def diary_create(request):
     if request.method == 'POST':
         page_form = PageForm(request.POST)
@@ -25,9 +27,8 @@ def diary_create(request):
             diary.author = request.user
             diary.save()
                 
-                # 2. Criar a página associada ao diário
             page = page_form.save(commit=False)
-            page.diary = diary  # Associa a página ao diário
+            page.diary = diary
             if not page.title:
                 page.title = timezone.now().date().strftime('%d/%m/%Y')
             page.save()
@@ -39,20 +40,19 @@ def diary_create(request):
         
     return render(request, 'page/diary_create.html', {'page_form': page_form,'diary_form': diary_form})
 
+# Função listagem de Diários apenas do usuário
 def user_diaries(request):
     if request.user.is_authenticated:
-        # CORRIGIDO: Page não tem campo 'author', use 'diary__author'
         diaries = Diary.objects.filter(author=request.user).order_by('-diary_creation_date')
     else:
         return redirect('login')
     return render(request, 'page/user_diaries.html', {'diaries': diaries})
 
+# Função para atualizar os dados do diário
 def diary_update(request, diary_id):
     diary = get_object_or_404(Diary, id=diary_id)
-    
     if diary.author != request.user:
         return redirect('feed')
-    
     if request.method == 'POST':
         form = DiaryForm(request.POST, instance=diary)
         if form.is_valid():
@@ -60,11 +60,12 @@ def diary_update(request, diary_id):
             return redirect('user_diaries')
     else:
         form = DiaryForm(instance=diary)
-        
-    return render(request, 'page/diary_update.html', {'form': form})
+    return render(request, 'page/diary_update.html', {'form': form, 'diary': diary})
 
+# Função para atualizar os dados da página
 def page_update(request, page_id):
-    page = Page.objects.get(pk=page_id)
+    page = get_object_or_404(Page, id=page_id)
+    diary = page.diary
     if request.method == 'POST':
         form = PageForm(request.POST, instance=page)
         if form.is_valid():
@@ -72,12 +73,10 @@ def page_update(request, page_id):
             return redirect('user_diaries')
     else:
         form = PageForm(instance=page)
-        
-    return render(request, 'page/post_edit.html', {'form': form})
+    return render(request, 'page/page_update.html', {'form': form, 'diary': diary, 'page_num': page.page_num})
             
 def page_add(request, diary_id):
     diary = get_object_or_404(Diary, id=diary_id)
-    
     if request.method == 'POST':
         form = PageForm(request.POST)
         if form.is_valid():
@@ -92,22 +91,20 @@ def page_add(request, diary_id):
     return render(request, 'page/page_add.html', {'form': form, 'diary': diary})
 
 def page_delete(request, page_id):
-    page = Page.objects.get(pk=page_id)
+    page = get_object_or_404(Page, pk=page_id)
+    if page.author != request.user:
+        return redirect('feed')
     page.delete()
     return redirect('user_diaries')
 
 def diary_delete(request, diary_id):
     diary = get_object_or_404(Diary, id=diary_id)
-
     if diary.author != request.user:
         return redirect('feed')
-    
-    if request.method == 'POST':
-        diary.delete()
-        return redirect('user_diaries')
+    diary.delete()
+    return redirect('user_diaries')
 
 def diary_view(request, diary_id):
-    # Busca o diário ou retorna 404 se não encontrar
     diary = get_object_or_404(Diary, pk=diary_id)
     
     # Verifica se o usuário tem permissão para ver o diário

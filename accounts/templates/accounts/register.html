@@ -14,51 +14,46 @@
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
         <!-- Lado direito - Formulário -->
         <div class="md:w-1/2 bg-gray-200 p-10">
-            <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Crie sua conta</h2>
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Create your account</h2>
             <form method="post" class="space-y-4" autocomplete="off" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Seu nome</label>
+                    <label class="block text-gray-700 font-semibold mb-1">Your real name</label>
                     {{ form.real_name }}
                 </div>
 
                 <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Seu nome de usuário</label>
+                    <label class="block text-gray-700 font-semibold mb-1">Your username</label>
                     {{ form.user_name }}
                 </div>
 
                 <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Sua foto de usuário</label>
-                    {{ form.avatar }}
-                </div>
-
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Seu email</label>
+                    <label class="block text-gray-700 font-semibold mb-1">Your Email</label>
                     {{ form.email }}
                 </div>
 
                 <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Data de nascimento</label>
+                    <label class="block text-gray-700 font-semibold mb-1">Birthday (Month/Day/Year)</label>
                     {{ form.birthday }}
                 </div>
 
                 <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Sua senha</label>
+                    <label class="block text-gray-700 font-semibold mb-1">Password</label>
                     {{ form.password1 }}
                 </div>
 
                 <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Confirme sua senha</label>
+                    <label class="block text-gray-700 font-semibold mb-1">Password Confirmation</label>
                     {{ form.password2 }}
                 </div>
 
-                <button type="submit" class="w-full bg-orange-600 hover:bg-red-600 transition text-white py-2 rounded-md text-lg font-medium">
+                <button type="submit" class="w-full bg-teal-600 hover:bg-teal-800 transition text-white py-2 rounded-md text-lg font-medium">
                     Sign up
                 </button>
                 <a href="{% url 'login' %}">
                   <span class="text-lg text-gray-700 font-medium hover:underline cursor-pointer">
-                  Já tem uma conta? Faça log in!
+                  Have an account? Log in!
                   </span>
                 </a>
             </form>

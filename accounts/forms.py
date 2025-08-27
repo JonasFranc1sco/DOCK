@@ -23,20 +23,20 @@ class CustomUserForm(UserCreationForm):
 
     birthday = forms.DateField(
         required=True,
-        input_formats=['%d/%m/%Y'],
         widget=forms.DateInput(
-            format='%d/%m/%Y', attrs={
-                "class": "bg-stone-100 px-4 py-2 outline-none rounded-md w-full", "placeholder": "Ex: 19/11/2005"
+                 attrs={
+                "type": "date",
+                "class": "bg-stone-100 px-4 py-2 outline-none rounded-md w-full", "placeholder": "Month/Day/Year"
                 })
     )
     avatar = forms.ImageField(
             required=False,
-            widget=forms.ClearableFileInput(attrs={"class": "bg-stone-100 px-4 py-2 outline-none rounded-md w-full", "placeholder": "Importe sua foto aqui"})
+            widget=forms.ClearableFileInput(attrs={"class": "bg-stone-100 px-4 py-2 outline-none rounded-md w-full"})
         )
     
     class Meta:
         model = CustomUser
-        fields = ['email', 'real_name', 'user_name','avatar']
+        fields = ['email', 'real_name', 'user_name', 'birthday', 'avatar']
         widgets = {
             'real_name': forms.TextInput(attrs={"class": "bg-stone-100 px-4 py-2 outline-none rounded-md w-full", "placeholder": "Type your real name"}),
             'user_name': forms.TextInput(attrs={"class": "bg-stone-100 px-4 py-2 outline-none rounded-md w-full", "placeholder": "Type your username"}),
@@ -52,12 +52,12 @@ class ProfileEditForm(forms.ModelForm):
         model = CustomUser
         fields = ['real_name', 'user_name', 'avatar']
         widgets = {
-            'real_name': forms.TextInput(attrs={"class": "bg-gray-700 text-white px-4 py-2 rounded-md w-full", "placeholder": "Nome"}),
-            'user_name': forms.TextInput(attrs={"class": "bg-gray-700 text-white px-4 py-2 rounded-md w-full", "placeholder": "Usuário"}),
+            'real_name': forms.TextInput(attrs={"class": "bg-zinc-800 text-white px-4 py-2 rounded-md w-full", "placeholder": "Name"}),
+            'user_name': forms.TextInput(attrs={"class": "bg-zinc-800 text-white px-4 py-2 rounded-md w-full", "placeholder": "User"}),
             'avatar': forms.ClearableFileInput(attrs={"class": "bg-gray-700 text-white"})
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['avatar'].widget.clear_checkbox_label = None
+        self.fields['avatar'].widget.clear_checkbox_label = ''
 

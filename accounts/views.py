@@ -5,10 +5,9 @@ from accounts.forms import CustomUserForm, CustomAuthenticationForm, ProfileEdit
 from django.contrib.auth import login, authenticate, logout
 from django.http import FileResponse
 
+# Função para retornar o avatar do usuário
 def serve_avatar(request, user_id):
     user = get_object_or_404(CustomUser, id=user_id)
-    
-    # ✅ Verificar se avatar existe
     if not user.avatar or not user.avatar.name:
         # Retornar avatar padrão ou erro 404
         return redirect('/static/img/default-avatar.png')
@@ -21,6 +20,7 @@ def serve_avatar(request, user_id):
     else:
         return redirect('login')
 
+# Função para registrar usuários
 def account_register(request):
     if request.method == 'POST':
         form = CustomUserForm(request.POST, request.FILES)
@@ -32,6 +32,7 @@ def account_register(request):
         form = CustomUserForm()
     return render(request, 'accounts/register.html', {'form': form})
 
+# Função de log in
 def account_login(request):
     if request.method == 'POST':
         form = CustomAuthenticationForm(request, request.POST)
@@ -47,6 +48,7 @@ def account_login(request):
         form = CustomAuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
 
+# Função log out dos usuários
 def account_logout(request):
     logout(request)
     return redirect('home')
@@ -57,13 +59,13 @@ def success(request):
 def home(request):
     return render(request, 'accounts/home.html')
 
+# Função para o usuário editar o próprio perfil
 def account_edit(request, user_id):
     if not request.user.is_authenticated:
         return redirect('login')
     
     user = get_object_or_404(CustomUser, pk=user_id)
-    
-    # ✅ SEGURANÇA: Só pode editar próprio perfil
+
     if request.user != user:
         return redirect('feed')
     
@@ -73,26 +75,24 @@ def account_edit(request, user_id):
             form.save()
             return redirect('feed')
         else:
-            # ✅ ADICIONAR: Debug para ver erros
             print(f"Form errors: {form.errors}")
     else:
         form = ProfileEditForm(instance=user)
         
     return render(request, 'accounts/account_edit.html', {'form': form})
     
+# Função para deletar a própria conta
 def account_delete(request, user_id):
     if not request.user.is_authenticated:
         return redirect('login')
     
     user = get_object_or_404(CustomUser, pk=user_id)
     
-    # ✅ Só pode deletar própria conta
     if request.user != user:
         return redirect('feed')
     
     if request.method == 'POST':
         user.delete()
-        return redirect('register')  # ✅ Adicionado return
-    
-    # Se for GET, mostrar página de confirmação
+        return redirect('register')
+
     return render(request, 'accounts/delete_confirm.html', {'user': user})

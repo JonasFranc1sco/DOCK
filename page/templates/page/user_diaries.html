@@ -3,8 +3,8 @@
 {% block content %}
 <div class="max-w-7xl mx-auto px-4 py-8">
     <h1 class="text-5xl font-extrabold text-center mb-8 flex items-center justify-center">
-      Seus diários
-      <img src="{% static 'img/website_icon.png' %}" alt="fire" class="w-25 h-25 object-contain"/>
+      Your diaries
+      <img src="{% static 'img/mini_website_icon.png' %}" alt="fire" class="w-25 h-25 object-contain"/>
     </h1>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -35,7 +35,7 @@
         </h2>
       </div>
       {% empty %}
-        <p class="col-span-3 text-center text-gray-500 p-6 bg-[#1c1c1c] border border-orange-600/30 rounded-lg">Você ainda não criou nenhum diário.</p>
+        <p class="col-span-3 text-center text-gray-500 p-6 bg-[#1c1c1c] border border-teal-600/30 rounded-lg">You haven't created any diary yet.</p>
       {% endfor %}
     </div>
     </div>

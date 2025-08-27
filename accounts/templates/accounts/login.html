@@ -10,21 +10,21 @@
             {% csrf_token %}
             
                 <div>
-                  <label class="block text-gray-700 font-semibold mb-1">Seu email</label>
+                  <label class="block text-gray-700 font-semibold mb-1">Email</label>
                     {{ form.username }}
                 </div>
                 
                 <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Sua senha</label>
+                    <label class="block text-gray-700 font-semibold mb-1">Password</label>
                     {{ form.password }}
                   </div>
                   
-                <button type="submit" class="w-full bg-orange-600 hover:bg-red-600 transition text-white py-2 rounded-md text-lg font-medium">
+                <button type="submit" class="w-full bg-teal-600 hover:bg-teal-800 transition text-white py-2 rounded-md text-lg font-medium">
                   Log in
                 </button>
                 <a href="{% url 'register' %}">
                   <span class="text-lg text-gray-700 font-medium hover:underline cursor-pointer">
-                  Não tem conta? Crie uma agora!
+                  Don't have an account? Sign up!
                   </span>
                 </a>
             </form>
