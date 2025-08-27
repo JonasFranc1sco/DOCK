@@ -34,7 +34,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     )
     email = models.EmailField(unique=True)
     real_name = models.CharField(max_length=50)
-    user_name = models.CharField(max_length=30)
+    user_name = models.CharField(max_length=30, unique=True)
     birthday = models.DateField(null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

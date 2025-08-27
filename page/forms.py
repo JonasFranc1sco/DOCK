@@ -7,11 +7,11 @@ class PageForm(forms.ModelForm):
         fields = ['title', 'content']
         widgets = {
             'title': forms.TextInput(attrs={
-                'placeholder': 'Nome da página',
+                'placeholder': 'Page name',
                 'class': 'w-full bg-transparent text-white text-2xl font-bold text-center border-none outline-none placeholder-gray-500 focus:outline-none'
             }),
             'content': forms.Textarea(attrs={
-                'placeholder': 'Conteúdo da página',
+                'placeholder': 'Page content',
                 'rows': 10,
                 'class':"w-full h-full resize-none text-3xl text-white font-bold border-none rounded-xl p-4 focus:outline-none"})
         }
@@ -19,12 +19,11 @@ class PageForm(forms.ModelForm):
 class DiaryForm(forms.ModelForm):
     public_access_date = forms.DateField(
         required=False,
-        input_formats=['%d/%m/%Y'],
         widget=forms.DateInput(
-            format='%d/%m/%Y',
             attrs={
+                "type": "date",
                 "class": "w-full rounded-lg border-gray-300",
-                'placeholder': 'Data de acesso público (Opcional)',
+                'placeholder': 'Public access date (Optional)',
                 'class': 'w-full bg-transparent text-white text-xl font-bold border-none outline-none placeholder-gray-500 focus:outline-none'
             }
         )
@@ -35,7 +34,7 @@ class DiaryForm(forms.ModelForm):
         fields = ['name', 'public_access']
         widgets = {
             'name': forms.TextInput(attrs={
-                'placeholder': 'Nome do diário',
+                'placeholder': 'Diary name',
                 'class': 'w-full bg-transparent text-white text-3xl font-bold text-center border-none outline-none placeholder-gray-500 focus:outline-none'}),
             
             "public_access": forms.CheckboxInput(attrs={

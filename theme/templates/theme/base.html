@@ -8,8 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Dock{% endblock %}</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="icon" type="image/x-icon" href="{% static 'img/website_icon.png' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'img/mini_website_icon.png' %}">
   <link rel="stylesheet" href="{% static 'css/feed.css' %}">
+
   <script src="{% static 'js/alpine.min.js' %}" defer></script>
   {% tailwind_css %}
 </head>
@@ -25,19 +26,19 @@
     <div class="flex flex-col items-center gap-8">
       <a href="{% url 'diary_create' %}" class="fas fa-plus text-3xl tracking-wider transition-transform duration-200 hover:scale-125 hover:text-gray-300"></a>
       <a href="{% url 'user_diaries' %}" class="fas fa-folder text-3xl tracking-wider transition-transform duration-200 hover:scale-125 hover:text-gray-300"></a>
-      <a href="{% url 'feed' %}" class= "fas fa-fire-alt text-3xl tracking-wider transition-transform duration-200 hover:scale-125 text-amber-300 hover:text-orange-400"></a>
+      <a href="{% url 'feed' %}" class= "fas fa-water text-3xl tracking-wider transition-transform duration-200 hover:scale-125 text-teal-700 hover:text-teal-400"></a>
     </div>
 
     <!-- avatar pequeno -->
     <a href="{% url 'account_edit' user.id %}">
-      <img src="{% url 'serve_avatar' user.id %}" alt="Avatar" class="w-9 h-9 rounded-full avatar-glow object-cover"/>
+      <img src="{% url 'serve_avatar' user.id %}" alt="Avatar" class="w-10 h-10 rounded-full avatar-glow object-cover"/>
     </a>
   </div>
 
   <!-- Ícone de fogo no final -->
   <div class="mb-8">
     <!-- ícone de fogo estilizado - substitua pelo seu asset -->
-    <img src="{% static 'img/website_icon.png' %}" alt="fire" class="w-20 h-20 object-contain"/>
+    <img src="{% static 'img/mini_website_icon.png' %}" alt="fire" class="w-20 h-20 object-contain"/>
   </div>
 </aside>
 

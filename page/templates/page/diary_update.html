@@ -3,7 +3,7 @@
 <div class="min-h-screen flex items-center justify-center p-10">
     <div class="w-full max-w-md">
         <h1 class="text-5xl font-extrabold text-center mb-8">
-          Edite seu diário
+          Edit your diary
         </h1>
         
         <form method="post" class="space-y-8 bg-zinc-900 rounded-2xl p-8" autocomplete="off">
@@ -12,18 +12,17 @@
             <div>
                 {{ form.name }}
             </div>
-
             <div x-data="{ checked: false }">
                 <label class="flex items-center gap-3 cursor-pointer">
                     {{ form.public_access }}
                     
-                    <span class="w-6 h-6 flex items-center justify-center border-2 border-gray-400 rounded peer-checked:bg-blue-600 peer-checked:border-blue-600">
+                    <span class="w-6 h-6 flex items-center justify-center border-2 border-gray-400 rounded peer-checked:bg-teal-600 peer-checked:border-teal-600">
                         <svg class="hidden w-4 h-4 text-white peer-checked:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
                         </svg>
                     </span>
                     
-                    <span class="text-white font-bold"> Tornar público </span>
+                    <span class="text-white font-bold"> Make public </span>
                 </label>
 
                 <div x-show="!checked" class="mt-4 transition-all duration-300">
@@ -32,13 +31,22 @@
                     </div>
                 </div>
             </div>
-
             <div class="w-full flex justify-center">
-                <button type="submit" class="big-oval-send rounded-md bg-orange-600 hover:bg-red-600 text-white text-lg transition-colors duration-300">
-                    Salvar Alterações
+                <button type="submit" class="big-oval-send rounded-md bg-teal-600 hover:bg-teal-800 text-white text-lg transition-colors duration-300">
+                    Save changes
                 </button>
             </div>
+            <a href="#" onclick="deleteDiary({{ diary.id }});" class="px-3 py-1 text-sm bg-zinc-800 hover:bg-red-700 rounded text-gray-400 hover:text-white transition-colors duration-200 flex items-center gap-1 mt-2">
+                <i class="fas fa-trash-alt"></i> Delete
+            </a>
         </form>
     </div>
 </div>
+<script>
+function deleteDiary(diaryId) {
+  if (confirm('Tem certeza que deseja excluir este diário? Esta ação não pode ser desfeita.')) {
+    window.location.href = "{% url 'diary_delete' 0 %}".replace('0', diaryId);
+  }
+}
+</script>
 {% endblock content %}
