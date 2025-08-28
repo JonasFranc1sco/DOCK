@@ -5,12 +5,12 @@ from datetime import date
         
 
 class Diary(models.Model):
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE) # Autor do diário
-    name = models.CharField(max_length=50, null=True, blank=True)   # Nome do diário
-    public_access = models.BooleanField(default=False)  # Define se o diário é público ou privado
-    public_access_date = models.DateField(blank=True, null=True)    # Data de publicação do diário
-    last_access_date = models.DateTimeField(auto_now_add=True)  # Apenas usado para dados       Data do último acesso no diário
-    diary_creation_date = models.DateTimeField(auto_now_add=True)   # Apenas usado para dados   Data de criação do diário
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, null=True, blank=True)
+    public_access = models.BooleanField(default=False)
+    public_access_date = models.DateField(blank=True, null=True)
+    last_access_date = models.DateTimeField(auto_now_add=True)
+    diary_creation_date = models.DateTimeField(auto_now_add=True)
     
     # Algoritmo para definir quando o diário ficará público
     def save(self, *args, **kwargs):
