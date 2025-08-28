@@ -69,6 +69,7 @@ def account_edit(request, user_id):
     if request.user != user:
         return redirect('feed')
     
+    # Se o método de requerimento for POST, o usuário receberá o formulário para editar o perfil.
     if request.method == 'POST':
         form = ProfileEditForm(request.POST, request.FILES, instance=user)
         if form.is_valid():

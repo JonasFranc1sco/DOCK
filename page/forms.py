@@ -38,7 +38,7 @@ class DiaryForm(forms.ModelForm):
                 'class': 'w-full bg-transparent text-white text-3xl font-bold text-center border-none outline-none placeholder-gray-500 focus:outline-none'}),
             
             "public_access": forms.CheckboxInput(attrs={
-                "x-model": "checked",   # Alpine.js binding
+                "x-model": "checked",   # Tag AlpineJS para checagem de true ou false
                 "id": "id_public_access",
                 "class": "peer hidden",
             })

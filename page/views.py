@@ -53,6 +53,8 @@ def diary_update(request, diary_id):
     diary = get_object_or_404(Diary, id=diary_id)
     if diary.author != request.user:
         return redirect('feed')
+    
+    # Se o método de requerimento for POST, o usuário receberá o formulário para editar o diário instanciado.
     if request.method == 'POST':
         form = DiaryForm(request.POST, instance=diary)
         if form.is_valid():
