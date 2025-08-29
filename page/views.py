@@ -94,7 +94,7 @@ def page_add(request, diary_id):
 
 def page_delete(request, page_id):
     page = get_object_or_404(Page, pk=page_id)
-    if page.author != request.user:
+    if page.diary.author != request.user:
         return redirect('feed')
     page.delete()
     return redirect('user_diaries')
