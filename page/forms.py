@@ -8,12 +8,12 @@ class PageForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={
                 'placeholder': 'Page name',
-                'class': 'w-full bg-transparent text-white text-2xl font-bold text-center border-none outline-none placeholder-gray-500 focus:outline-none'
+                'class': 'w-full p-1 bg-transparent text-white text-3xl font-bold text-center outline-none placeholder-gray-500 focus:outline-none'
             }),
             'content': forms.Textarea(attrs={
                 'placeholder': 'Page content',
                 'rows': 10,
-                'class':"w-full h-full resize-none text-3xl text-white font-bold border-none rounded-xl p-4 focus:outline-none"})
+                'class':"w-full h-full resize-none text-3xl text-white font-bold rounded-xl p-4 focus:outline-none"})
         }
 
 class DiaryForm(forms.ModelForm):
@@ -22,9 +22,9 @@ class DiaryForm(forms.ModelForm):
         widget=forms.DateInput(
             attrs={
                 "type": "date",
-                "class": "w-full rounded-lg border-gray-300",
+                "class": "w-full rounded-lg",
                 'placeholder': 'Public access date (Optional)',
-                'class': 'w-full bg-transparent text-white text-xl font-bold border-none outline-none placeholder-gray-500 focus:outline-none'
+                'class': 'w-full bg-transparent text-white text-xl font-bold outline-none placeholder-gray-500 focus:outline-none'
             }
         )
     )
@@ -35,7 +35,7 @@ class DiaryForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={
                 'placeholder': 'Diary name',
-                'class': 'w-full bg-transparent text-white text-3xl font-bold text-center border-none outline-none placeholder-gray-500 focus:outline-none'}),
+                'class': 'w-full p-1 bg-transparent text-white text-3xl font-bold text-center border-none outline-none placeholder-gray-500 focus:outline-none'}),
             
             "public_access": forms.CheckboxInput(attrs={
                 "x-model": "checked",   # Tag AlpineJS para checagem de true ou false

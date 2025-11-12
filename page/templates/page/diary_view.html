@@ -2,36 +2,18 @@
 
 {% block content %}
 <main class="flex-1 px-8 py-8">
-  
-  {% if is_owner %}
-      <!-- Botão de voltar -->
-  <div class="max-w-4xl mx-auto mb-6">
-    <a href="{% url 'user_diaries' %}" class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-      <i class="fas fa-arrow-left"></i>
-      Back to your diaries
-    </a>
-  </div>
-  {% endif %}
-  
-  <!-- Botão de voltar -->
-  <div class="max-w-4xl mx-auto mb-6">
-    <a href="{% url 'feed' %}" class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-      <i class="fas fa-arrow-left"></i>
-      Back to feed
-    </a>
-  </div>
 
   <!-- Container do diário -->
-  <div class="max-w-4xl mx-auto">
+  <div class="max-w-4xl pt-4 rounded-4xl mx-auto bg-card-profile-blue">
     
     <p class="text-gray-400 text-sm mb-3 text-center">{{ diary.diary_creation_date }}</p>
     <!-- Botões de ação (se for o autor) -->
     {% if is_owner %}
       <div class="flex justify-center gap-3">
-      <a href="{% url 'page_add' diary.id %}" class="px-4 py-2 bg-teal-600 hover:bg-teal-700 rounded-lg text-white font-medium transition-colors">
+      <a href="{% url 'page_add' diary.id %}" class="px-4 py-2 page-add-bottom rounded-lg text-white font-medium transition-colors">
         <i class="fas fa-plus mr-2"></i>New page
       </a>
-      <a href="{% url 'diary_update' diary.id %}" class="px-4 py-2 bg-yellow-300 hover:bg-yellow-500 rounded-lg text-white font-medium transition-colors">
+      <a href="{% url 'diary_update' diary.id %}" class="px-4 py-2 page-edit-bottom rounded-lg text-white font-medium transition-colors">
         <i class="fas fa-edit mr-2"></i>Edit
       </a>
       </div>
@@ -83,7 +65,7 @@
     <!-- Páginas do diário -->
     <div class="space-y-8">
       {% for page in pages %}
-        <article class="bg-zinc-900 rounded-xl p-8 card-shadow relative">
+        <article class="bg-card-blue p-8 relative">
           
           <!-- Cabeçalho da página -->
             <div class="flex items-center justify-between mb-6">
@@ -96,10 +78,10 @@
             <!-- Botões de ação da página (se for o autor) -->
             {% if is_owner %}
               <div class="flex gap-2">
-                <a href="{% url 'page_update' page.id %}" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-sm transition-colors">
+                <a href="{% url 'page_update' page.id %}" class="px-3 py-1 page-edit-bottom rounded text-white text-sm transition-colors">
                   <i class="fas fa-edit"></i>
                 </a>
-                <button onclick="deletePage({{ page.id }})" class="px-3 py-1 bg-red-600 hover:bg-red-700 rounded text-white text-sm transition-colors">
+                <button onclick="deletePage({{ page.id }})" class="px-3 py-1 page-delete-bottom rounded text-white text-sm transition-colors">
                   <i class="fas fa-trash"></i>
                 </button>
               </div>
@@ -115,7 +97,7 @@
 
           <!-- Rodapé da página -->
           <footer class="mt-6 pt-4 border-t border-gray-700 text-sm text-gray-400 text-right">
-            <span class="text-white px-4 py-1 rounded-full text-sm font-medium">
+            <span class="text-gray-400 px-4 py-1 rounded-full text-sm font-medium">
               Page {{ page.page_num }}
             </span>
             Created on {{ page.page_creation_date }}
@@ -128,7 +110,7 @@
           <h3 class="text-2xl font-bold text-white mb-2">Diário vazio</h3>
           <p class="text-gray-400 mb-6">This diary has no pages yet.</p>
           {% if is_owner %}
-            <a href="{% url 'page_add' diary.id %}" class="inline-flex items-center gap-2 px-8 py-3 bg-teal-600 hover:bg-teal-800 rounded-lg text-white font-medium transition-colors">
+            <a href="{% url 'page_add' diary.id %}" class="inline-flex items-center gap-2 px-8 py-3 bg-button-access-blue rounded-lg text-white font-medium transition-colors">
               <i class="fas fa-plus"></i>
               Create first page
             </a>

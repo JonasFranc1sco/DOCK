@@ -1,67 +1,136 @@
-    /* ajustes finos que não existem direto em classes Tailwind */
-    /* Botão oval grande */
-    .big-oval {
-      width: 520px;
-      height: 56px;
-      border-radius: 9999px;
-      border: 2px solid rgba(165,165,165,0.45);
-      backdrop-filter: blur(4px);
-    }
+/* ajustes finos que não existem direto em classes Tailwind */
+/* Botão oval grande */
+.big-oval {
+  width: 520px;
+  height: 56px;
+  border-radius: 9999px;
+  border: 2px solid #89A7B1;
+  backdrop-filter: blur(4px);
+}
 
-    .big-oval-send {
-      width: 520px;
-      height: 56px;
-      border-radius: 9999px;
-      border: 2px solid rgba(255, 72, 0, 0);
-      backdrop-filter: blur(4px);
-    }
-    /* sombra suave do cartão */
-    .card-shadow {
-      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-    }
-    /* glow atrás do avatar (pequeno) */
+.big-oval-send {
+  width: 520px;
+  height: 56px;
+  border-radius: 9999px;
+  border: 2px solid rgba(255, 72, 0, 0);
+  backdrop-filter: blur(4px);
+}
+/* sombra suave do cartão */
+.card-shadow {
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+/* glow atrás do avatar (pequeno) */
 
-    /* círculo branco com seta */
-    .next-circle {
-      width:44px;
-      height:44px;
-      border-radius:9999px;
-      background:white;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-    }
+/* círculo branco com seta */
+.next-circle {
+  width:44px;
+  height:44px;
+  border-radius:9999px;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-    .next-circle-user {
-      width:30px;
-      height:30px;
-      border-radius:9999px;
-      background:white;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-    }
+.next-circle-user {
+  width:30px;
+  height:30px;
+  border-radius:9999px;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-    .plus-circle {
-      width:30px;
-      height:30px;
-      border-radius:9999px;
-      background: rgb(0, 0, 0);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-    }
+.plus-circle {
+  width:30px;
+  height:30px;
+  border-radius:9999px;
+  background: rgb(0, 0, 0);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-    .update-circle-user {
-      width:30px;
-      height:30px;
-      border-radius:9999px;
-      background: rgb(0, 105, 92) ;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+.update-circle-user {
+  width:30px;
+  height:30px;
+  border-radius:9999px;
+  background: #6c769b ;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.bg-background-blue {
+  background-color: #566981;
+}
+
+.bg-div-blue {
+  background-color: #3A415A;
+}
+
+.bg-card-profile-blue {
+  background-color: #34344E;
+}
+
+.bg-card-blue {
+  background-color: #3A415A;
+}
+
+.icon-feed-blue {
+  color: #89A7B1;
+}
+
+.bg-button-access-blue {
+  background-color: #34344E;
+}
+
+.bg-button-access-blue:hover {
+  background-color: #454e6d;
+}
+
+.bg-button-create-blue {
+  border-color: #454e6d;
+}
+
+
+.bg-button-create-blue:hover {
+  border-color: #566981;
+}
+
+.peer-checked\:bg-check-blue {
+    &:is(:where(.peer):checked ~ *) {
+        background-color: #34344E 
     }
+}
+
+.peer-checked\:border-check-blue {
+    &:is(:where(.peer):checked ~ *) {
+        border-color: #34344E 
+    }
+}
+
+.page-add-bottom {
+  background-color: #7590b1;
+}
+
+.page-add-bottom:hover{
+  background-color: #7dbcd1;
+}
+
+.page-edit-bottom {
+  background-color: #6472a0;
+}
+
+.page-edit-bottom:hover{
+  background-color: #6c769b;
+}
+
+.page-delete-bottom {
+  background-color: rgb(255, 85, 85);
+}
+
+.page-delete-bottom:hover{
+  background-color: rgb(255, 150, 150);
+}

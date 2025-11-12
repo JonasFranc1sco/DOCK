@@ -7,14 +7,15 @@
     <title>Sign Up</title>
     <link rel="icon" type="image/x-icon" href="{% static 'img/mini_website_icon.png' %}">
     {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'css/feed.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body class="bg-zinc-800 min-h-screen flex items-center justify-center">
-    <div class="bg-zinc-900 rounded-2xl shadow-lg overflow-hidden w-full max-w-4xl flex flex-col md:flex-row">
+<body class="bg-background-blue min-h-screen flex items-center justify-center">
+    <div class="bg-div-blue rounded-2xl shadow-lg overflow-hidden w-full max-w-4xl flex flex-col md:flex-row">
         
         <!-- Lado esquerdo - Ilustração -->
-        <div class="md:w-1/2 bg-zinc-900 flex items-center justify-center p-8">
-            <img src="{% static 'img/website_icon.png' %}" alt="Illustration" class="w-72 h-auto">
+        <div class="md:w-1/2 bg-div-blue flex items-center justify-center p-8">
+            <img src="{% static 'img/website_icon.png' %}" alt="Illustration" class="rounded-2xl">
         </div>
         {% block content %}
 

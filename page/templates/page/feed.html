@@ -14,7 +14,7 @@
   <div class="max-w-3xl mx-auto space-y-10">
     {% for diary in diaries %}
       {% with first_page=diary.pages.first %}
-      <article class="relative bg-zinc-900 rounded-xl p-6 card-shadow">
+      <article class="relative bg-div-blue rounded-xl p-6">
         
         <!-- Cabeçalho do card -->
         <div class="grid grid-cols-3 items-center mb-4">
@@ -44,7 +44,7 @@
         <!-- Botão de próxima página -->
         <div class="absolute right-[-22px] top-1/2 transform -translate-y-1/2">
           <a href="{% url 'diary_view' diary.id %}" title="Próxima página" class="next-circle">
-            <i class="fas fa-eye text-black text-lg"></i>
+            <i class="fas fa-eye icon-feed-blue text-lg"></i>
           </a>
         </div>
 

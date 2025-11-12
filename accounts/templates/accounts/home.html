@@ -7,18 +7,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DOCK</title>
+    <link rel="stylesheet" href="{% static 'css/feed.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'img/mini_website_icon.png' %}">
 
     {% tailwind_css %}
   </head>
-  <body class="bg-zinc-800 font-sans">
+  <body class="bg-background-blue font-sans">
 
     <div class="min-h-screen flex items-center justify-center">
       <div class="bg-zinc-900 w-full max-w-4xl rounded-xl shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2">
 
         <!-- Lado esquerdo: imagem -->
-        <div class="flex items-center justify-center bg-zinc-900 p-10">
-          <img src="{% static 'img/website_icon.png' %}" alt="Logo" class="w-100 h-100 object-contain">
+        <div class="flex items-center justify-center bg-div-blue p-10">
+          <img src="{% static 'img/website_icon.png' %}" alt="Logo" class="rounded-2xl">
         </div>
 
         <!-- Lado direito: conteúdo -->
@@ -27,10 +28,10 @@
           <p class="text-gray-50 mb-6">Write about your ideias, travels, thoughts and routines. Free your mind 📗🧠🍃</p>
 
           <div class="space-y-4">
-            <a href="{% url 'login' %}" class="w-full block text-center bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-800 transition">
+            <a href="{% url 'login' %}" class="w-full block text-center bg-button-access-blue text-white py-3 rounded-lg  transition">
               Access Diary
             </a>
-            <a href="{% url 'register' %}" class="w-full block text-center border bg-zinc-900 border-teal-900 text-teal-400 py-3 rounded-lg hover:bg-zinc-950 transition">
+            <a href="{% url 'register' %}" class="w-full block text-center border bg-button-create-blue text-white py-3 rounded-lg transition">
               Create Diary
             </a>
           </div>

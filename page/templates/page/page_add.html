@@ -2,23 +2,23 @@
 
 {% block content %}
 <div class="p-10 pt-12 mx-auto flex justify-center w-[90%] h-[90vh]">
-    <div class="rounded-xl pt-6 flex flex-col justify-between w-full h-full">
+    <div class="rounded-3xl bg-div-blue pt-6 flex flex-col justify-between w-full h-full">
         <h1 class="text-3xl font-bold mb-6 text-center text-white">
-            New page for the diary: <span class="text-teal-300">{{ diary.name }}</span>
+            New page for the diary: <span class="text-blue-500">{{ diary.name }}</span>
         </h1>
         <form method="post" class="space-y-8 flex flex-col pt-16 w-full h-full" autocomplete="off">
             {% csrf_token %}
 
-            <div>
+            <div class="border">
                 {{ form.title }}
             </div>
 
-            <div class="flex-1">
+            <div class="flex-1 border">
                 {{ form.content }}
             </div>
 
-            <div class="w-full flex justify-center">
-                <button type="submit" class="big-oval-send rounded-md bg-teal-600 hover:bg-teal-800 text-white text-lg transition-colors duration-300">
+            <div class="w-full mb-4 flex justify-center">
+                <button type="submit" class="big-oval-send rounded-md bg-button-access-blue text-white text-lg transition-colors duration-300">
                     Send
                 </button>
             </div>

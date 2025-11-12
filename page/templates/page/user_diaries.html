@@ -4,12 +4,11 @@
 <div class="max-w-7xl mx-auto px-4 py-8">
     <h1 class="text-5xl font-extrabold text-center mb-8 flex items-center justify-center">
       Your diaries
-      <img src="{% static 'img/mini_website_icon.png' %}" alt="fire" class="w-25 h-25 object-contain"/>
     </h1>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       {% for diary in diaries %}
-      <div class="bg-zinc-900 p-6 flex flex-col break-words justify-between border border-white">
+      <div class="bg-div-blue rounded-2xl m-2 p-6 flex flex-col break-words justify-between">
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-2">
             <img src="{%  url 'serve_avatar' user.id %}" 
@@ -22,10 +21,10 @@
           <a href="{% url 'page_add' diary.id %}" class="plus-circle">
             <i class="fa fa-plus text-white text-lg"></i>
           </a>
-          <a href="{% url 'diary_update' diary.id %}" title="Editar o diário" class="update-circle-user">
+          <a href="{% url 'diary_update' diary.id %}" title="Edit diary" class="update-circle-user">
             <i class="fas fa-pen text-white text-xg"></i>
           </a>
-          <a href="{% url 'diary_view' diary.id %}" title="Próxima página" class="next-circle-user">
+          <a href="{% url 'diary_view' diary.id %}" title="Next page" class="next-circle-user">
             <i class="fas fa-eye text-black text-lg"></i>
           </a>
         </div>
@@ -35,7 +34,7 @@
         </h2>
       </div>
       {% empty %}
-        <p class="col-span-3 text-center text-gray-500 p-6 bg-[#1c1c1c] border border-teal-600/30 rounded-lg">You haven't created any diary yet.</p>
+        <p class="col-span-3 text-center text-gray-500 p-6 bg-div-blue rounded-lg">You haven't created any diary yet.</p>
       {% endfor %}
     </div>
     </div>
