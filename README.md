@@ -53,7 +53,7 @@ The project will be available at:
 Adjust the .env file as needed (if you want to use environment variables).
 
 🛤️ Roadmap
-Funcionalidades planejadas para versões futuras:
+features planned for future versions:
 
  Upload and edit user profile images
 
